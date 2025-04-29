@@ -18,14 +18,19 @@ estados = st.multiselect(
 
 df_filtrado = df[df["estado_version"].isin(estados)]
 
+# Preparar datos para gráfico
+conteo_estados = df_filtrado["estado_version"].value_counts().reset_index()
+conteo_estados.columns = ["estado", "cantidad"]
+
 # Gráfico de barras
 fig = px.bar(
-    df_filtrado["estado_version"].value_counts().reset_index(),
-    x="index", y="estado_version",
-    labels={"index": "Estado", "estado_version": "Cantidad de Hosts"},
-    color="index",
+    conteo_estados,
+    x="estado", y="cantidad",
+    labels={"estado": "Estado", "cantidad": "Cantidad de Hosts"},
+    color="estado",
     title="Cantidad de Hosts por Estado de Versión"
 )
+
 fig.update_layout(xaxis_title="Estado", yaxis_title="Cantidad")
 
 st.plotly_chart(fig, use_container_width=True)
