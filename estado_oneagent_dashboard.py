@@ -7,7 +7,7 @@ st.set_page_config(page_title="Estado OneAgent", layout="wide")
 st.title("📊 Dashboard de Estado de OneAgent por Host")
 
 # Cargar datos
-df = pd.read_excel("estado_oneagent_2025_actualizado.xlsx")
+df = pd.read_excel("estado_oneagent_hosts.xlsx")
 
 # Filtro de estado
 estados = st.multiselect(
